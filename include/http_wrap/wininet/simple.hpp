@@ -1,9 +1,9 @@
 #pragma once
 
-#include "abstract_simple.hpp"
-#include "options.hpp"
-#include "wrap.hpp"
-#include "url.hpp"
+#include "http_wrap/wininet/options.hpp"
+#include "http_wrap/wininet/wrap.hpp"
+#include "http_wrap/abstract_simple.hpp"
+#include "http_wrap/url.hpp"
 
 #include <memory>
 #include <string>

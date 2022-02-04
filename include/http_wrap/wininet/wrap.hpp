@@ -1,6 +1,6 @@
 #pragma once
 
-#include "options.hpp"
+#include "http_wrap/wininet/options.hpp"
 
 #include <array>
 #include <string_view>

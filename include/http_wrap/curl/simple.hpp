@@ -1,7 +1,7 @@
 #pragma once
 
-#include "abstract_simple.hpp"
-#include "wrap.hpp"
+#include "http_wrap/abstract_simple.hpp"
+#include "http_wrap/curl/wrap.hpp"
 
 namespace http_wrap::curl {
 class simple : public abstract_simple {\

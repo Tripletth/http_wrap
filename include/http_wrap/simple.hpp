@@ -1,12 +1,12 @@
 #pragma once
 
 #if defined(HTTP_WRAP_USE_WININET)
-#include "wininet/simple.hpp"
+#include "http_wrap/wininet/simple.hpp"
 namespace http_wrap {
 using simple = wininet::simple;
 }
 #elif defined(HTTP_WRAP_USE_CURL)
-#include "curl/simple.hpp"
+#include "http_wrap/curl/simple.hpp"
 namespace http_wrap {
 using simple = curl::simple;
 }
