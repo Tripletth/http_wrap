@@ -17,6 +17,7 @@ namespace http_wrap {
 class simple : public abstract_simple {
 public:
     simple(url_t url) : abstract_simple{url} {}
+    simple(std::string_view url) : abstract_simple{url} {}
     std::string get() const override { return "no http_wrap implementation defined"; }
     std::string post() const override { return "no http_wrap implementation defined"; }
 };
