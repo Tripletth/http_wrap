@@ -1,5 +1,7 @@
 #pragma once
 
+#include "http_wrap/url.hpp"
+
 #include <algorithm>
 #include <string>
 #include <sstream>
@@ -10,7 +12,7 @@
 namespace http_wrap::wininet {
 namespace options {
 struct internet {
-    std::string  agent{"Internet"};
+    std::string  agent{};
     unsigned int access_type{INTERNET_OPEN_TYPE_PRECONFIG};
     std::string  proxy{};
     std::string  proxy_bypass{};

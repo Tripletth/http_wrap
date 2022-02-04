@@ -25,7 +25,7 @@ public:
     : curl{curl_easy_init()}, result{CURLE_OK}, headers_ptr{nullptr}, opts{opts_in}, read_data{}  {
         curl_easy_setopt(curl, CURLOPT_URL, opts.url.c_str());
         for (const auto& header : opts.headers) {
-            curl_slist_append(headers_ptr, header.data());
+            headers_ptr = curl_slist_append(headers_ptr, header.data());
         }
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers_ptr);
     }

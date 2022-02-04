@@ -4,16 +4,21 @@
 #include "http_wrap/curl/wrap.hpp"
 
 namespace http_wrap::curl {
-class simple : public abstract_simple {\
+class simple : public abstract_simple {
 public:
     simple(url_t url) : http_wrap::abstract_simple{url} {}
+    simple(std::string_view url) : simple{url_t(url)} {}
     std::string get() const override {
         curl::request::options options {
             .url = url.url,
             .headers = headers
         };
         curl::request request{options};
-        return std::string(request.to_str_view());
+        if (request.perform()) {
+            return std::string(request.to_str_view());
+        } else {
+            return request.error();
+        }
     }
     std::string post() const override {
         curl::request::options request_options {
@@ -24,7 +29,11 @@ public:
             .post_data = request_data
         };
         curl::post request{request_options, post_options};
-        return std::string(request.to_str_view());
+        if (request.perform()) {
+            return std::string(request.to_str_view());
+        } else {
+            return request.error();
+        }
     }
 };
 }
