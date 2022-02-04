@@ -19,7 +19,7 @@ public:
             internet = std::make_unique<wininet::internet>();
         }
     }
-    simple(std::string_view url) : simple{url_t(url)} {
+    simple(std::string_view url) : simple{url_t(url)} {}
     std::string get() const override {
         return perform("GET");
     }
