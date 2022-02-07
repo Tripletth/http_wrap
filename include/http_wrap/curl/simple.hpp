@@ -10,7 +10,7 @@ public:
     std::string get() const override {
         curl::request::options options {
             .url = url,
-            .headers = headers
+            .headers = request_headers
         };
         curl::request request{options};
         if (request.perform()) {
@@ -22,7 +22,7 @@ public:
     std::string post() const override {
         curl::request::options request_options {
             .url = url,
-            .headers = headers
+            .headers = request_headers
         };
         curl::post::options post_options {
             .post_data = request_data
