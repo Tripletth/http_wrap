@@ -25,7 +25,8 @@ public:
         request_options.headers = request_headers;
 
         winhttp::session session{*internet, url_components.host(), url_components.port()};
-        winhttp::request request{session, url_components.object_and_parameters(), L"GET", request_options};
+        std::wstring object = (request_data.empty() ? url_components.object_and_parameters() : (url_components.object() + L'?' + strcvt::to_wstr(request_data)));
+        winhttp::request request{session, object, L"GET", request_options};
 
         auto buffer{request.read()};
         return {buffer.begin(), buffer.end()};
