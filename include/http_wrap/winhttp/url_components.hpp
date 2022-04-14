@@ -54,6 +54,14 @@ struct url_components {
     std::wstring parameters() const {
         return std::wstring(parameters_v());
     }
+    std::wstring object_and_parameters() const {
+        std::wstring params {parameters()};
+        if (params.empty()) {
+            return object();
+        } else {
+            return object() + L'?' + params;
+        }
+    }
     std::wstring url;
     URL_COMPONENTS components;
 };

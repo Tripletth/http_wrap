@@ -20,19 +20,25 @@ public:
         }
     }
     std::string get() const override {
-        return perform(L"GET");
+        winhttp::url_components url_components{url};
+        winhttp::options::request request_options{url_components.port()};
+        request_options.headers = request_headers;
+
+        winhttp::session session{*internet, url_components.host(), url_components.port()};
+        winhttp::request request{session, url_components.object_and_parameters(), L"GET", request_options};
+
+        auto buffer{request.read()};
+        return {buffer.begin(), buffer.end()};
     }
     std::string post() const override {
-        return perform(L"POST");
-    }
-    std::string perform(std::wstring_view type) const {
         winhttp::url_components url_components{url};
         winhttp::options::request request_options{url_components.port()};
         request_options.headers = request_headers;
         request_options.optional = request_data.empty() ? strcvt::to_str(url_components.parameters()) : request_data;
 
         winhttp::session session{*internet, url_components.host(), url_components.port()};
-        winhttp::request request{session, url_components.object(), type, request_options};
+        winhttp::request request{session, url_components.object(), L"POST", request_options};
+
         auto buffer{request.read()};
         return {buffer.begin(), buffer.end()};
     }
